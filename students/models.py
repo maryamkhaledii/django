@@ -6,6 +6,9 @@ class Student(models.Model):
     fullname = models.CharField(max_length=64)
     score = models.PositiveIntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=100)
+    student_id = models.CharField(max_length=10, unique=True)
+    email = models.EmailField(blank=True)
 
 
 class Teacher(models.Model):

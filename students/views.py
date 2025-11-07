@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_40
 from students.models import Student, Course
 from students.forms import StudentForm
 
@@ -28,3 +28,15 @@ def courses_view(request):
     all_courses = Course.objects.all()
     context = {"courses": all_courses}
     return render(request, "student/courses.html", context)
+
+def students_list(request):
+    students = Student.objects.all()
+    return render(request, 'students/students_list.html', {'students': students})
+
+def teachers_courses(request):
+    courses = Course.objects.filter(is_active=True)
+    return render(request, 'students/courses_list.html', {'courses': courses})
+
+def course_detail(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    return render(request, 'students/course_detail.html', {'course': course})

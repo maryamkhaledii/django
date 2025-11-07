@@ -1,0 +1,10 @@
+<h1>{{ course.title }}</h1>
+<p>Teacher: {{ course.teacher.user.username }}</p>
+<h3>Students:</h3>
+<ul>
+  {% for student in course.students.all %}
+  <li>{{ student.name }}</li>
+  {% empty %}
+  <li>No students yet</li>
+  {% endfor %}
+</ul>
