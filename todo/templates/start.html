@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>This is a Heading23123123</h1>
+    <p id="id_class">This is a paragraph.</p>
+    {% for task_obj in list_tasks %}
+    <p>{{task_obj.title}} | {{task_obj.student.fullname}}</p>
+    {% endfor %}
+    <!-- {% for text in tasks_titles %}
+    <p>{{text}}</p>
+    {% endfor %} -->
+  </body>
+</html>

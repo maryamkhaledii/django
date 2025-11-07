@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Courses Page</h1>
+    <ul>
+      {% for course in courses%}
+      <li>{{course.title}}: {{course.code}}</li>
+      {% for student in course.students.all %}
+      <p>{{student.fullname}}</p>
+      {% endfor %} {% endfor %}
+    </ul>
+  </body>
+</html>

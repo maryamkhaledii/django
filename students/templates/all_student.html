@@ -1,0 +1,24 @@
+{% extends "student_base.html" %}
+
+{% block content %}
+  <ul>
+      {% for student in students%}
+        {% if student.img %}
+          <li>{{student.fullname}}: {{student.score}}</li>
+          <img src={{student.img.url}}>
+          {% for course in student.courses.all %}
+            <p>{{course.title}}</p>
+          {% endfor %} 
+          {% for task in student.tasks.all %}
+            <p>{{task.title}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <p>{{message}}</p>
+    <form action={% url "student:student_list_new" %} method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="ورود">
+    </form>
+{% endblock %}

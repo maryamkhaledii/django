@@ -1,0 +1,15 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p>
+            {{message}}
+        </p>
+        <form action={% url "account:user-register" %} method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ثبت نام">
+        </form>
+    </body>
+</html>
