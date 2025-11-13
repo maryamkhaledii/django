@@ -1,11 +1,11 @@
 from django.views import View
 from students.models import *
 from students.forms import *
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
-class AllStudentsView(View):
+class AllStudentsView(LoginRequiredMixin, View):
     html_file = "student/all_student.html"
     form = StudentForm()
 
@@ -68,9 +68,24 @@ class AddProfileView(View):
         # return render(request, self.html, {"form": ProfileForm()})
 
 
-        
 class AllTeachersView(View):
     html = "student/teachers.html"
     def get(self, request):
         teachers = Teacher.objects.all()
         return render(request, self.html, {"teachers": teachers})
+
+
+class AllCoursesView(LoginRequiredMixin, View):
+    html_file = "student/courses.html"
+
+    def get(self, request):
+        all_courses = Course.objects.all()
+        return render(request, self.html_file, {"courses": all_courses})
+    
+
+class EnrollCourseView(LoginRequiredMixin, View):
+
+    def post(self, request, pk):
+        course = get_object_or_404(Course, pk=pk)
+        course.students.add(request.user.profile.student)
+        return redirect("student:all-courses")

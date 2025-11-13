@@ -1,0 +1,16 @@
+<html>
+<head><meta charset="utf-8"><title>Tasks</title></head>
+<body>
+  <h1>Tasks</h1>
+  {% if user.is_authenticated and user.is_staff %}
+    <p><a href="{% url 'students:task_create' %}">Create Task</a></p>
+  {% endif %}
+  <ul>
+    {% for t in tasks %}
+      <li>{{ t.title }} — Course: {{ t.course.title }} — {% if t.assigned_to %}{{ t.assigned_to.name }}{% else %}Unassigned{% endif %} — {% if t.done %}Done{% else %}Not done{% endif %}</li>
+    {% empty %}
+      <li>No tasks found.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

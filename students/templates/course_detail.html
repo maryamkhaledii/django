@@ -1,4 +1,4 @@
-<h1>{{ course.title }}</h1>
+{% comment %} <h1>{{ course.title }}</h1>
 <p>Teacher: {{ course.teacher.user.username }}</p>
 <h3>Students:</h3>
 <ul>
@@ -7,4 +7,33 @@
   {% empty %}
   <li>No students yet</li>
   {% endfor %}
-</ul>
+</ul> {% endcomment %}
+
+<html>
+<head><meta charset="utf-8"><title>{{ course.title }}</title></head>
+<body>
+  <h1>{{ course.title }}</h1>
+  <p>{{ course.description }}</p>
+  <p>Teacher: {{ course.teacher.username }}</p>
+  <h3>Students</h3>
+  <ul>
+    {% for s in students %}
+      <li>{{ s.name }} ({{ s.student_id }})</li>
+    {% empty %}
+      <li>No students enrolled.</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Tasks</h3>
+  <ul>
+    {% for t in tasks %}
+      <li>{{ t.title }} — {% if t.assigned_to %}{{ t.assigned_to.name }}{% else %}All{% endif %}</li>
+    {% empty %}
+      <li>No tasks yet.</li>
+    {% endfor %}
+  </ul>
+
+  <p><a href="{% url 'students:courses_list' %}">Back to courses</a></p>
+</body>
+</html>
+

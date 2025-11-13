@@ -1,0 +1,12 @@
+
+<html>
+<head><meta charset="utf-8"><title>Create Course</title></head>
+<body>
+  <h1>Create Course</h1>
+  <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  <p><a href="{% url 'students:courses_list' %}">Back</a></p>
+</body>
+</html>

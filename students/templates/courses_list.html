@@ -1,6 +1,27 @@
-<h1>Courses</h1>
+{% comment %} <h1>Courses</h1>
 <ul>
   {% for course in courses %}
   <li><a href="/courses/{{ course.id }}/">{{ course.title }}</a></li>
   {% endfor %}
-</ul>
+</ul> {% endcomment %}
+
+<html>
+<head><meta charset="utf-8"><title>Courses</title></head>
+<body>
+  <h1>Courses</h1>
+  {% if user.is_authenticated and user.is_staff %}
+    <p><a href="{% url 'students:course_create' %}">Create new course</a></p>
+  {% endif %}
+  <ul>
+    {% for course in courses %}
+      <li>
+        <a href="{% url 'students:course_detail' course.pk %}">{{ course.title }}</a>
+        {% if not course.is_active %} (inactive) {% endif %}
+         Teacher: {{ course.teacher.username }}
+      </li>
+    {% empty %}
+      <li>No courses yet.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

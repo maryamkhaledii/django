@@ -1,0 +1,11 @@
+<html>
+<head><meta charset="utf-8"><title>Create Task</title></head>
+<body>
+  <h1>Create Task</h1>
+  <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  <p><a href="{% url 'students:tasks_list' %}">Back</a></p>
+</body>
+</html>
